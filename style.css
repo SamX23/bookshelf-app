@@ -19,6 +19,23 @@ body {
   position: relative;
 }
 
+header {
+  display: flex;
+  justify-content: center;
+  align-items: censter;
+  padding: 1rem 0;
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+header h1 {
+  text-transform: uppercase;
+}
+
+main {
+  margin: 1rem;
+}
+
 .card {
   background-color: white;
   border-radius: 10px;
@@ -27,15 +44,33 @@ body {
 
 .toast {
   position: fixed;
-  bottom: 1rem;
+  display: block;
+  top: 1rem;
   right: 1rem;
+  left: 1rem;
+  width: 200px;
+  word-break: break-all;
+  margin: auto;
+  text-align: center;
   padding: 0.5rem 1rem;
   z-index: 999;
   background-color: var(--secondary);
   color: var(--white);
   font-weight: bold;
-  display: none;
   transition: all 0.5s ease-in-out;
+  border: unset;
+}
+
+.toast-success {
+  background-color: forestgreen;
+}
+
+.toast-info {
+  background-color: var(--secondary);
+}
+
+.toast-error {
+  background-color: red;
 }
 
 footer {
