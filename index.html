@@ -8,8 +8,40 @@
     <title>Document</title>
   </head>
   <body>
-    <header></header>
-    <main></main>
+    <header>
+      <h1>Bookshelf App</h1>
+    </header>
+    <main>
+      <section>
+        <h2>Add book</h2>
+        <form id="submit-form">
+          <label for="title">Judul</label>
+          <input type="text" id="title" required />
+
+          <label for="author">Penulis</label>
+          <input type="text" id="author" required />
+
+          <label for="year">Tahun</label>
+          <input type="date" id="year" required />
+
+          <button type="submit" id="add-book">Add</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Read</h2>
+        <div id="finished-book">
+          <div>Card</div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Unread</h2>
+        <div id="unfinished-book">
+          <div>Card</div>
+        </div>
+      </section>
+    </main>
     <footer>
       <span>
         Modified with ♥️ by
