@@ -22,7 +22,14 @@
           <input type="text" id="author" required />
 
           <label for="year">Tahun</label>
-          <input type="date" id="year" required />
+          <input
+            type="number"
+            id="year"
+            min="1000"
+            max="2100"
+            step="1"
+            required
+          />
 
           <button type="submit" id="add-book">Add</button>
         </form>
@@ -30,16 +37,29 @@
 
       <section>
         <h2>Read</h2>
-        <div id="finished-book">
-          <div>Card</div>
-        </div>
+
+        <input
+          type="text"
+          id="search-finished-book"
+          placeholder="Search finished book"
+        />
+
+        <hr />
+
+        <div id="finished-book" class="book__cards"></div>
       </section>
 
       <section>
         <h2>Unread</h2>
-        <div id="unfinished-book">
-          <div>Card</div>
-        </div>
+        <input
+          type="text"
+          id="search-unfinished-book"
+          placeholder="Search finished book"
+        />
+
+        <hr />
+
+        <div id="unfinished-book" class="book__cards"></div>
       </section>
     </main>
     <footer>

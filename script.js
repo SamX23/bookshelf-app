@@ -9,8 +9,10 @@ const buttonSubmit = document.querySelector("#add-book");
 const finishedBook = document.querySelector("#finished-book");
 const unfinishedBook = document.querySelector("#unfinished-book");
 
-const DATA = [];
 const generateId = () => +new Date();
+const RENDER = "RENDER";
+const STORAGE_KEY = "bookshelf";
+let DATA = [];
 
 /**
  *
@@ -19,7 +21,7 @@ const generateId = () => +new Date();
  */
 const createToast = (text, type = "success") => {
   const toast = document.createElement("div");
-  toast.classList = `card toast toast-${type}`;
+  toast.classList = `card toast toast__${type}`;
   toast.innerText = text;
 
   mainElement.append(toast);
@@ -27,11 +29,65 @@ const createToast = (text, type = "success") => {
 };
 
 const createCard = (data) => {
-  const card = document.createElement("div");
-  card.classList = "card";
-  card.innerText = data.title + data.author + data.year;
+  const cardContainer = document.createElement("div");
+  cardContainer.classList = "card";
 
-  finishedBook.append(card);
+  const cardSummary = document.createElement("div");
+  cardSummary.classList = "card__summary";
+  cardSummary.innerText = data.title + data.author + data.year;
+
+  const cardAction = document.createElement("div");
+  cardAction.classList = "card__action";
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Remove";
+  deleteButton.setAttribute("data-id", data.id);
+  deleteButton.addEventListener("click", (e) => {
+    const currentId = e.target.dataset.id;
+    const idCard = DATA.findIndex((item) => item.id == currentId);
+    DATA.splice(idCard, 1);
+
+    document.dispatchEvent(new Event(RENDER));
+    addToLocalStorage();
+  });
+
+  const finishButton = document.createElement("button");
+  finishButton.innerText = "Finish";
+  finishButton.setAttribute("data-id", data.id);
+  finishButton.addEventListener("click", (e) => {
+    const currentId = e.target.dataset.id;
+    const idCard = DATA.findIndex((item) => item.id == currentId);
+    DATA.splice(idCard, 1);
+
+    document.dispatchEvent(new Event(RENDER));
+    addToLocalStorage();
+  });
+
+  cardAction.append(finishButton, deleteButton);
+  cardContainer.append(cardSummary, cardAction);
+
+  finishedBook.append(cardContainer);
+};
+
+const addToLocalStorage = () => {
+  const data = JSON.parse(DATA);
+  localStorage.setItem(RENDER, data);
+};
+
+const checkLocalStorage = () => {
+  const currentData = localStorage.getItem(STORAGE_KEY);
+
+  if (currentData) {
+    const dataFromStorage = JSON.parse(currentData);
+    dataFromStorage.map((item) => DATA.push(item));
+  }
+
+  document.dispatchEvent(new Event(RENDER));
+};
+
+const appendToLocalStorage = () => {
+  const data = JSON.parse(DATA);
+  localStorage.setItem(RENDER, data);
 };
 
 submitForm.addEventListener("submit", (e) => {
@@ -48,13 +104,21 @@ submitForm.addEventListener("submit", (e) => {
     isComplete: false,
   };
 
-  DATA.push(currentData);
-  createCard(currentData);
-  createToast(`${title} has been added !`);
+  addData(currentData);
+
+  document.dispatchEvent(new Event(RENDER));
+  addToLocalStorage();
+});
+
+document.addEventListener(RENDER, () => {
+  finishedBook.innerHTML = "";
+  unfinishedBook.innerHTML = "";
+
+  DATA.map((item) => {
+    createCard(item);
+  });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  createToast("Normal !");
-  createToast("INFO !", "info");
-  createToast("Error !", "error");
+  checkLocalStorage();
 });

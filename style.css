@@ -33,13 +33,39 @@ header h1 {
 }
 
 main {
-  margin: 1rem;
+  margin: 1rem auto;
+  max-width: 1024px;
+}
+
+hr {
+  margin: 1rem 0;
+}
+
+input {
+  padding: 2px 5px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+button {
+  padding: 0.25rem 0.5rem;
+  outline: none;
+}
+
+.book__cards {
+  max-height: 40vh;
+  overflow: auto;
+  margin: 1rem 0;
 }
 
 .card {
   background-color: white;
   border-radius: 10px;
   border: 1px solid var(--secondary);
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .toast {
@@ -52,7 +78,6 @@ main {
   word-break: break-all;
   margin: auto;
   text-align: center;
-  padding: 0.5rem 1rem;
   z-index: 999;
   background-color: var(--secondary);
   color: var(--white);
@@ -61,15 +86,15 @@ main {
   border: unset;
 }
 
-.toast-success {
+.toast__success {
   background-color: forestgreen;
 }
 
-.toast-info {
+.toast__info {
   background-color: var(--secondary);
 }
 
-.toast-error {
+.toast__error {
   background-color: red;
 }
 
