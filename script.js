@@ -70,28 +70,21 @@ const createCard = (data) => {
 };
 
 const addToLocalStorage = () => {
-  const data = JSON.parse(DATA);
-  localStorage.setItem(RENDER, data);
-};
-
-const checkLocalStorage = () => {
-  const currentData = localStorage.getItem(STORAGE_KEY);
-
-  if (currentData) {
-    const dataFromStorage = JSON.parse(currentData);
-    dataFromStorage.map((item) => DATA.push(item));
-  }
+  const data = JSON.stringify(DATA);
+  localStorage.setItem(STORAGE_KEY, data);
 
   document.dispatchEvent(new Event(RENDER));
 };
 
-const appendToLocalStorage = () => {
-  const data = JSON.parse(DATA);
-  localStorage.setItem(RENDER, data);
+const checkLocalStorage = () => {
+  const currentData = localStorage.getItem(STORAGE_KEY);
+  const dataFromStorage = JSON.parse(currentData);
+
+  dataFromStorage && dataFromStorage.map((item) => DATA.push(item));
+  document.dispatchEvent(new Event(RENDER));
 };
 
-submitForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+const addTodo = () => {
   const title = titleInput.value;
   const author = authorInput.value;
   const year = yearInput.value;
@@ -104,21 +97,22 @@ submitForm.addEventListener("submit", (e) => {
     isComplete: false,
   };
 
-  addData(currentData);
+  DATA.push(currentData);
 
   document.dispatchEvent(new Event(RENDER));
   addToLocalStorage();
+};
+
+submitForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  addTodo();
 });
 
 document.addEventListener(RENDER, () => {
   finishedBook.innerHTML = "";
   unfinishedBook.innerHTML = "";
 
-  DATA.map((item) => {
-    createCard(item);
-  });
+  DATA.map((item) => createCard(item));
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  checkLocalStorage();
-});
+document.addEventListener("DOMContentLoaded", () => checkLocalStorage());
