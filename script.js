@@ -41,7 +41,7 @@ const finishBookTask = (bookObject) => {
   const bookTarget = findTodo(bookObject.id);
 
   if (bookTarget != null) {
-    bookTarget.isCompleted = true;
+    bookTarget.isComplete = true;
 
     document.dispatchEvent(new Event(RENDER));
     addToLocalStorage();
@@ -56,7 +56,7 @@ const undoBookTask = (bookObject) => {
   const bookTarget = findTodo(bookObject.id);
 
   if (bookTarget != null) {
-    bookTarget.isCompleted = false;
+    bookTarget.isComplete = false;
 
     document.dispatchEvent(new Event(RENDER));
     addToLocalStorage();
@@ -74,7 +74,7 @@ const removeBookTask = (bookObject) => {
 };
 
 const createCard = (bookObject) => {
-  const { title, author, year, isCompleted } = bookObject;
+  const { title, author, year, isComplete } = bookObject;
 
   const cardContainer = document.createElement("div");
   cardContainer.classList = "card";
@@ -99,7 +99,7 @@ const createCard = (bookObject) => {
 
   deleteButton.addEventListener("click", () => removeBookTask(bookObject));
 
-  if (isCompleted) {
+  if (isComplete) {
     const undoButton = document.createElement("button");
     undoButton.innerText = "Undo";
 
@@ -146,7 +146,7 @@ const addTodo = () => {
     title,
     author,
     year,
-    isCompleted: false,
+    isComplete: false,
   };
 
   BOOKS.push(currentData);
@@ -167,7 +167,7 @@ document.addEventListener(RENDER, () => {
   BOOKS.map((book) => {
     const card = createCard(book);
 
-    book.isCompleted
+    book.isComplete
       ? finishedBookCase.append(card)
       : unfinishedBookCase.append(card);
   });
