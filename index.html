@@ -13,23 +13,27 @@
     </header>
     <main>
       <section>
-        <h2>Add book</h2>
         <form id="submit-form">
-          <label for="title">Judul</label>
-          <input type="text" id="title" required />
-
-          <label for="author">Penulis</label>
-          <input type="text" id="author" required />
-
-          <label for="year">Tahun</label>
-          <input
-            type="number"
-            id="year"
-            min="1000"
-            max="2100"
-            step="1"
-            required
-          />
+          <h2>Add book</h2>
+          <div class="form-group">
+            <label for="title">Judul</label>
+            <input type="text" id="title" required />
+          </div>
+          <div class="form-group">
+            <label for="author">Penulis</label>
+            <input type="text" id="author" required />
+          </div>
+          <div class="form-group">
+            <label for="year">Tahun</label>
+            <input
+              type="number"
+              id="year"
+              min="1000"
+              max="2100"
+              step="1"
+              required
+            />
+          </div>
 
           <button type="submit" id="add-book">Add</button>
         </form>
@@ -54,7 +58,7 @@
         <input
           type="text"
           id="search-unfinished-book"
-          placeholder="Search finished book"
+          placeholder="Search unread book"
         />
 
         <hr />

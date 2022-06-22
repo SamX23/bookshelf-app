@@ -34,7 +34,11 @@ header h1 {
 
 main {
   margin: 1rem auto;
-  max-width: 1024px;
+  max-width: 800px;
+}
+
+section {
+  margin: 1rem 0;
 }
 
 hr {
@@ -51,6 +55,30 @@ button {
   padding: 0.25rem 0.5rem;
   outline: none;
   cursor: pointer;
+}
+
+#submit-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 250px;
+  margin: auto;
+}
+
+#submit-form button {
+  margin-top: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--secondary);
+  background: white;
+  color: var(--secondary);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 0;
+  text-align: left;
 }
 
 .book__cards {

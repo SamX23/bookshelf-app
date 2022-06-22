@@ -8,6 +8,8 @@ const submitForm = document.querySelector("#submit-form");
 const buttonSubmit = document.querySelector("#add-book");
 const finishedBookCase = document.querySelector("#finished-book");
 const unfinishedBookCase = document.querySelector("#unfinished-book");
+const searchFinishedBook = document.querySelector("#search-finished-book");
+const searchUnfinishedBook = document.querySelector("#search-unfinished-book");
 
 const generateId = () => +new Date();
 const RENDER = "RENDER";
@@ -85,32 +87,35 @@ const createCard = (bookObject) => {
   const cardAction = document.createElement("div");
   cardAction.classList = "card__action";
 
+  const editButton = document.createElement("button");
+  editButton.innerText = "Edit";
+
+  editButton.addEventListener("click", () =>
+    console.log("edit not working yet")
+  );
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Remove";
+
+  deleteButton.addEventListener("click", () => removeBookTask(bookObject));
+
   if (isCompleted) {
-    const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Remove";
-
-    deleteButton.addEventListener("click", () => removeBookTask(bookObject));
-
     const undoButton = document.createElement("button");
     undoButton.innerText = "Undo";
 
     undoButton.addEventListener("click", () => undoBookTask(bookObject));
 
-    cardAction.append(undoButton, deleteButton);
+    cardAction.append(undoButton);
   } else {
-    const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Remove";
-
-    deleteButton.addEventListener("click", () => removeBookTask(bookObject));
-
     const finishButton = document.createElement("button");
     finishButton.innerText = "Finish";
 
     finishButton.addEventListener("click", () => finishBookTask(bookObject));
 
-    cardAction.append(finishButton, deleteButton);
+    cardAction.append(finishButton);
   }
 
+  cardAction.append(editButton, deleteButton);
   cardContainer.append(cardSummary, cardAction);
 
   return cardContainer;
@@ -169,3 +174,17 @@ document.addEventListener(RENDER, () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => checkLocalStorage());
+
+searchFinishedBook.addEventListener("keyup", (e) => {
+  const currentValue = e.currentTarget.value;
+  const filter = currentValue.toUpperCase();
+
+  console.log(filter);
+});
+
+searchUnfinishedBook.addEventListener("keyup", (e) => {
+  const currentValue = e.currentTarget.value;
+  const filter = currentValue.toUpperCase();
+
+  console.log(filter);
+});
