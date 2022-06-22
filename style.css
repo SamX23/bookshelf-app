@@ -50,6 +50,7 @@ input {
 button {
   padding: 0.25rem 0.5rem;
   outline: none;
+  cursor: pointer;
 }
 
 .book__cards {
@@ -66,6 +67,21 @@ button {
   margin-bottom: 0.5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.card__action button {
+  border: 1px solid var(--secondary);
+  background: white;
+  color: var(--secondary);
+}
+
+.card__action button:first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+.card__action button:last-child {
+  border-radius: 0 5px 5px 0;
 }
 
 .toast {
